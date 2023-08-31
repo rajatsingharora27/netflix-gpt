@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 
 const Login = () => {
+  const [isSignInForm, setIsSignInForm] = useState(true);
+  const toggle = () => {
+    setIsSignInForm(!isSignInForm);
+  };
+
   return (
     <div className="">
       <Header />
@@ -14,11 +19,20 @@ const Login = () => {
       {/* <div className="absolute top-1/4 left-1/4 w-56 h-60 md:left-1/3 md:h-80 md:w-80 lg:left-[46rem] xl:left-[96rem]"> */}
       {/* <div className="absolute inset-0 m-auto  "> */}
       <form className="absolute mx-auto left-0 right-0 bg-black p-12 w-3/12 my-48 text-white flex flex-col justify-start rounded-lg bg-opacity-80 ">
-        <h1 className=" text-3xl font-bold">Sign In</h1>
+        <h1 className=" text-3xl font-bold">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h1>
         <div className="flex flex-col gap-y-11 pt-6">
+          {!isSignInForm && (
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full p-2 bg-gray-700"
+            />
+          )}
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Email Address"
             className="w-full p-2 bg-gray-700"
           />
           <input
@@ -27,9 +41,13 @@ const Login = () => {
             className="w-full p-2 bg-gray-700"
           />
           <button className="text-white bg-red-500 p-4 font-bold rounded-lg">
-            Sign in
+            {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
-          <p>New to Netflix? Sign up Now </p>
+          <p className="cursor-pointer" onClick={toggle}>
+            {isSignInForm
+              ? " New to Netflix? SignUp Now"
+              : "Already a user? SignIn"}
+          </p>
         </div>
       </form>
       {/* </div> */}
