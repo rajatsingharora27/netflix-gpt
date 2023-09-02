@@ -1,15 +1,31 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 
-export const createNewUser = (email, password, setErrorMessage, navigate) => {
+export const createNewUser = (
+  fullName,
+  email,
+  password,
+  setErrorMessage,
+  navigate,
+  dispatch
+) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
-      console.log(userCredential);
-      console.log("user Signed Up Successually");
+      const user = userCredential.user;
+      updateProfile(user, {
+        displayName: fullName,
+      })
+        .then(() => {
+          console.log("Updated profile");
+        })
+        .catch((error) => {
+          setErrorMessage(error.message);
+        });
       navigate("/browse");
     })
     .catch((error) => {

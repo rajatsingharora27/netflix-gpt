@@ -3,6 +3,7 @@ import Header from "./Header";
 import { validateFileds } from "../utils/validation";
 import { createNewUser, signIn } from "../utils/firebaseUtils/createNewUser";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -12,6 +13,8 @@ const Login = () => {
   const password = useRef(null);
   const fullName = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const submitForm = () => {
     var value = {
       fullName: !isSignInForm ? fullName?.current?.value : "",
@@ -25,7 +28,14 @@ const Login = () => {
     }
     if (!isSignInForm) {
       console.log("loading....");
-      createNewUser(value.email, value.password, setErrorMessage, navigate);
+      createNewUser(
+        value.fullName,
+        value.email,
+        value.password,
+        setErrorMessage,
+        navigate,
+        dispatch
+      );
     } else {
       //Sign In logic
       setLoader(!loader);
