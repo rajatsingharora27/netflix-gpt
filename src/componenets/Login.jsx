@@ -1,14 +1,17 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { validateFileds } from "../utils/validation";
+import { createNewUser, signIn } from "../utils/firebaseUtils/createNewUser";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loader, setLoader] = useState(false);
   const email = useRef(null);
   const password = useRef(null);
   const fullName = useRef(null);
-
+  const navigate = useNavigate();
   const submitForm = () => {
     var value = {
       fullName: !isSignInForm ? fullName?.current?.value : "",
@@ -16,10 +19,19 @@ const Login = () => {
       password: password.current.value,
     };
     const err = validateFileds(value, isSignInForm);
-
-    setErrorMessage(err);
-    // console.log(errorMessage);
-    // console.log(err);
+    if (err) {
+      setErrorMessage(err);
+      return;
+    }
+    if (!isSignInForm) {
+      console.log("loading....");
+      createNewUser(value.email, value.password, setErrorMessage, navigate);
+    } else {
+      //Sign In logic
+      setLoader(!loader);
+      signIn(value.email, value.password, setErrorMessage, navigate);
+      setLoader(!loader);
+    }
   };
   const toggle = () => {
     setIsSignInForm(!isSignInForm);
@@ -32,7 +44,7 @@ const Login = () => {
       <img
         src="https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4f-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/IN-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg"
         alt="Logo"
-        className="absolute w-[100vw] h-[100vh] bg-image-gradient-315deg from-violet-500 to-fuchsia-500 "
+        className="absolute w-[100vw] max-h-max bg-image-gradient-315deg from-violet-500 to-fuchsia-500 "
       />
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -70,10 +82,16 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="text-white bg-red-500 p-4 font-bold rounded-lg"
+            className="text-white bg-red-500 p-4 font-bold rounded-lg flex justify-center"
             onClick={submitForm}
           >
-            {isSignInForm ? "Sign In" : "Sign Up"}
+            {loader && (
+              <svg
+                className="animate-spin h-5 w-5 mr-3 bg-black "
+                viewBox="0 0 24 24"
+              ></svg>
+            )}
+            <p>{isSignInForm ? "Sign In" : "Sign Up"}</p>
           </button>
           {errorMessage?.length > 0 && (
             <p className=" text-red-500 font-bold text-base">{errorMessage}</p>
