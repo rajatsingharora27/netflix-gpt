@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { validateFileds } from "../utils/validation";
 import { createNewUser, signIn } from "../utils/firebaseUtils/createNewUser";
-import { useNavigate } from "react-router-dom";
+import { imageConstants } from "../utils/constants/imageConstant";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const fullName = useRef(null);
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const submitForm = () => {
@@ -33,13 +33,12 @@ const Login = () => {
         value.email,
         value.password,
         setErrorMessage,
-        navigate,
         dispatch
       );
     } else {
       //Sign In logic
       setLoader(!loader);
-      signIn(value.email, value.password, setErrorMessage, navigate);
+      signIn(value.email, value.password, setErrorMessage);
       setLoader(!loader);
     }
   };
@@ -52,7 +51,7 @@ const Login = () => {
     <div className="">
       <Header />
       <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/00103100-5b45-4d4f-af32-342649f1bda5/64774cd8-5c3a-4823-a0bb-1610d6971bd4/IN-en-20230821-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+        src={imageConstants.backgroundImage}
         alt="Logo"
         className="absolute w-[100vw] max-h-max bg-image-gradient-315deg from-violet-500 to-fuchsia-500 "
       />

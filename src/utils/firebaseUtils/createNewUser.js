@@ -10,7 +10,7 @@ export const createNewUser = (
   email,
   password,
   setErrorMessage,
-  navigate,
+
   dispatch
 ) => {
   createUserWithEmailAndPassword(auth, email, password)
@@ -26,19 +26,17 @@ export const createNewUser = (
         .catch((error) => {
           setErrorMessage(error.message);
         });
-      navigate("/browse");
     })
     .catch((error) => {
       setErrorMessage(error.message);
     });
 };
 
-export const signIn = (email, password, setErrorMessage, navigate) => {
+export const signIn = (email, password, setErrorMessage) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      navigate("/browse");
     })
     .catch((error) => {
       const errorCode = error.code;
