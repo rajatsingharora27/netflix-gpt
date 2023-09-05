@@ -14,7 +14,7 @@ const Secondarycontainer = () => {
         {Object.entries(movies).length !== 0 && (
           <MovieList title={"Now Playing"} movies={movies} />
         )}
-        {Object.entries(popularMovies).length !== 0 && (
+        {Object.entries(trending).length !== 0 && (
           <MovieList title={"Trending"} movies={trending} />
         )}
         {Object.entries(popularMovies).length !== 0 && (
