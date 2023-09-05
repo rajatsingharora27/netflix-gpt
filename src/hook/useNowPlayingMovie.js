@@ -10,7 +10,7 @@ const useNowPlayingMovies = () => {
       // console.log(URL);
       const getData = await fetch(URL, API_OPTIONS);
       const json = await getData.json();
-      //   console.log(json.results);
+      // console.log(json.results);
       dispatch(addNowPlayingMovies(json.results));
     };
     getMainPageList();

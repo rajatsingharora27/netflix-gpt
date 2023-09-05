@@ -1,4 +1,6 @@
 export const URL = process.env.REACT_APP_MOVIE_LIST_URL;
+export const POPLUAR_MOVIE_URL = process.env.REACT_APP_POPULAR_MOVIE;
+export const TRENDING = process.env.REACT_APP_TENDING;
 // console.log(URL);
 export const API_OPTIONS = {
   method: "GET",
