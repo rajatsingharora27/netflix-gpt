@@ -2,7 +2,7 @@ import React from "react";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="absolute bg-gradient-to-r from-black text-white w-screen aspect-video pt-[20%]  px-24 flex flex-col justify-start">
+    <div className="absolute bg-gradient-to-r from-black  text-white w-[100%] aspect-video pt-[20%]  px-24 flex flex-col justify-start">
       <h1 className="font-bold text-3xl">{title}</h1>
       <p className="w-11/12 text-lg py-4  lg:w-1/2 ">{overview}</p>
       <div className="flex justify-start items-center gap-x-2">
