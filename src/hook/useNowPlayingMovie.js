@@ -7,7 +7,7 @@ const useNowPlayingMovies = () => {
   const dispatch = new useDispatch();
   useEffect(() => {
     const getMainPageList = async () => {
-      console.log(URL);
+      // console.log(URL);
       const getData = await fetch(URL, API_OPTIONS);
       const json = await getData.json();
       //   console.log(json.results);
