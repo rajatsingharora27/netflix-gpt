@@ -22,6 +22,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const [isGptPage, setIsGptPage] = useState(false);
 
+  // const handleHomePage = () => {
+  //   navigate("/browse");
+  // };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -64,7 +68,7 @@ const Header = () => {
         src={imageConstants.netFlixLogo}
         alt="logo"
         className="cursor-pointer w-44"
-        onClick={() => navigate("/")}
+        onClick={takeToGptPage}
       />
       {user && (
         <div className="flex gap-x-3 w-[35%] items-center justify-end ">

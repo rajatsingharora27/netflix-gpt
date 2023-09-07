@@ -9,10 +9,14 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMDIxNDU1ODJiN2IwYmU2YzQwYTg0NmMzYWNiMDQxZSIsInN1YiI6IjYyNzY2YjhmOTU2NjU4MTFlYTdlNmNlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0W0qZaV-VBVuAwtMPCqy-ldZl19uL_zmha-ZiDRbj6g",
+    Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
   },
 };
+
+export const OPENAI_API_KEY =
+  "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";
+
+// process.env.REACT_APP_OPEN_API_KEY;
 
 // fetch(url, options)
 //   .then(res => res.json())
