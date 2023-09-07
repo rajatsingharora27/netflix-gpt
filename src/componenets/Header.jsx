@@ -72,7 +72,7 @@ const Header = () => {
             onClick={takeToGptPage}
             className=" bg-red-500  rounded-md text-white font-bold text-xl hover:bg-red-400 "
           >
-            {!isGptPage ? "GPT SEARCH" : "Home"}
+            {!isGptPage ? "GPT SEARCH" : "Home Page"}
           </Button>
           {isGptPage && (
             <select
@@ -80,7 +80,11 @@ const Header = () => {
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => {
-                return <option key={lang.identifier}>{lang.language}</option>;
+                return (
+                  <option className="text-white bg-black" key={lang.identifier}>
+                    {lang.language}
+                  </option>
+                );
               })}
             </select>
           )}
