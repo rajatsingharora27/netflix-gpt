@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../utils/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../redux/slice/userSlice";
 import { imageConstants } from "../utils/constants/imageConstant";
+import { toggleGptSearch } from "../redux/slice/gptSerach";
+import { Button } from "@mui/material";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const [isGptPage, setIsGptPage] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -28,12 +31,18 @@ const Header = () => {
       unsubscribe();
     };
   }, []);
+
   const signOutButon = () => {
     signOut(auth)
       .then(() => {})
       .catch((error) => {
         navigate("/error");
       });
+  };
+
+  const takeToGptPage = () => {
+    dispatch(toggleGptSearch());
+    setIsGptPage(!isGptPage);
   };
 
   return (
@@ -46,13 +55,19 @@ const Header = () => {
         onClick={() => navigate("/")}
       />
       {user && (
-        <div className="flex">
-          <button
+        <div className="flex gap-x-2">
+          <Button
+            onClick={takeToGptPage}
+            className="bg-purple-600 mx-2 my-2 px-8 rounded-md text-white font-bold text-xl hover:bg-purple-400 "
+          >
+            {!isGptPage ? "GPT SEARCH" : "Home"}
+          </Button>
+          <Button
             className="text-white font-bold text-xl "
             onClick={signOutButon}
           >
             (Sign Out)
-          </button>
+          </Button>
         </div>
       )}
     </div>
