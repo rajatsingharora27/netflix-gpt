@@ -6,7 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../redux/slice/userSlice";
 import { imageConstants } from "../utils/constants/imageConstant";
 import { toggleGptSearch } from "../redux/slice/gptSerach";
-import { Button } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { SUPPORTED_LANGUAGES } from "../utils/constants/languageGpt";
+import { changeLanguage } from "../redux/slice/languageConfigSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -45,6 +53,10 @@ const Header = () => {
     setIsGptPage(!isGptPage);
   };
 
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
+
   return (
     //
     <div className=" absolute w-[100%] px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
@@ -55,18 +67,28 @@ const Header = () => {
         onClick={() => navigate("/")}
       />
       {user && (
-        <div className="flex gap-x-2">
+        <div className="flex gap-x-3 w-[35%] items-center justify-end ">
           <Button
             onClick={takeToGptPage}
-            className="bg-purple-600 mx-2 my-2 px-8 rounded-md text-white font-bold text-xl hover:bg-purple-400 "
+            className=" bg-red-500  rounded-md text-white font-bold text-xl hover:bg-red-400 "
           >
             {!isGptPage ? "GPT SEARCH" : "Home"}
           </Button>
+          {isGptPage && (
+            <select
+              className="p-2 bg-gray-900 text-white m-2 rounded-md w-[20%]"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => {
+                return <option key={lang.identifier}>{lang.language}</option>;
+              })}
+            </select>
+          )}
           <Button
-            className="text-white font-bold text-xl "
+            className="bg-red-500  rounded-md text-white font-bold text-xl hover:bg-red-400 shadow-2xl"
             onClick={signOutButon}
           >
-            (Sign Out)
+            Sign Out
           </Button>
         </div>
       )}
