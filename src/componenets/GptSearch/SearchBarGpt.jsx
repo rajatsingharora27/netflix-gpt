@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../../utils/constants/languageGpt";
 import { openai } from "../../utils/openAiUtils/openAI";
 import { API_OPTIONS } from "../../utils/constants/apiConstants";
-import { addGptMovieResult } from "../../redux/slice/gptSerach";
+import {
+  addErrorMessage,
+  addGptMovieResult,
+} from "../../redux/slice/gptSerach";
+import { useNavigate } from "react-router-dom";
 
 const SearchBarGpt = () => {
   const languageSelected = useSelector((state) => state.config.lang);
@@ -12,6 +16,7 @@ const SearchBarGpt = () => {
   const dispatch = useDispatch();
   const [showLoading, setShowLoading] = useState(false);
   const [serchText, setSearchText] = useState(null);
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     setSearchText(e.target.value);
@@ -27,48 +32,54 @@ const SearchBarGpt = () => {
   };
 
   const handleSearchOpenAI = async () => {
-    // console.log(showLoading);
-    setShowLoading(true);
-    // console.log(showLoading);
-    //----------------Commented  this to prevent OPENAPI CALL------------------------//
+    try {
+      // console.log(showLoading);
+      setShowLoading(true);
+      // console.log(showLoading);
+      //----------------Commented  this to prevent OPENAPI CALL------------------------//
 
-    const messageString =
-      "Act as a movie Recommendation system and suggest some movies fro the query : " +
-      serchText +
-      ". only give me names of 5 movies, comma seperated like the exple result given ahead. Example Result : koi mill gya , andaz apna apna , hero ,don,jawan";
-    const gptResult = await openai.chat.completions.create({
-      messages: [{ role: "user", content: messageString }],
-      model: "gpt-3.5-turbo",
-    });
-    const recomennedMovieList =
-      gptResult.choices[0]?.message?.content.split(",");
+      const messageString =
+        "Act as a movie Recommendation system and suggest some movies fro the query : " +
+        serchText +
+        ". only give me names of 5 movies, comma seperated like the exple result given ahead. Example Result : koi mill gya , andaz apna apna , hero ,don,jawan";
+      const gptResult = await openai.chat.completions.create({
+        messages: [{ role: "user", content: messageString }],
+        model: "gpt-3.5-turbo",
+      });
+      const recomennedMovieList =
+        gptResult.choices[0]?.message?.content.split(",");
 
-    const moviePromise = recomennedMovieList.map((movie) => {
-      return getMovieDataFormTMDB(movie);
-    });
+      const moviePromise = recomennedMovieList.map((movie) => {
+        return getMovieDataFormTMDB(movie);
+      });
 
-    // -------------------------------------UNCOMMENT WHEN NESSARY------------------------------------
+      // -------------------------------------UNCOMMENT WHEN NESSARY------------------------------------
 
-    // const moviePromise = [
-    //   "Andaz Apna Apna",
-    //   " Chupke Chupke",
-    //   " Gol Maal",
-    //   " Amar Akbar Anthony",
-    //   " Padosan",
-    // ].map((movie) => {
-    //   return getMovieDataFormTMDB(movie);
-    // });
-    // const recomennedMovieList = [];
-    const movieList = await Promise.all(moviePromise);
-    setShowLoading(false);
-    console.log(showLoading);
-    dispatch(
-      addGptMovieResult({
-        movieNames: recomennedMovieList,
-        movieResults: movieList,
-      })
-    );
-    console.log(movieList);
+      // const moviePromise = [
+      //   "Andaz Apna Apna",
+      //   " Chupke Chupke",
+      //   " Gol Maal",
+      //   " Amar Akbar Anthony",
+      //   " Padosan",
+      // ].map((movie) => {
+      //   return getMovieDataFormTMDB(movie);
+      // });
+      // const recomennedMovieList = [];
+      const movieList = await Promise.all(moviePromise);
+      setShowLoading(false);
+      console.log(showLoading);
+      dispatch(
+        addGptMovieResult({
+          movieNames: recomennedMovieList,
+          movieResults: movieList,
+        })
+      );
+      console.log(movieList);
+    } catch (error) {
+      dispatch(addErrorMessage(error.message));
+      navigate("/error");
+      // console.log(error.message);
+    }
   };
 
   return (

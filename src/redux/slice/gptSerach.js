@@ -6,6 +6,7 @@ const gptSearchSlice = createSlice({
     currentGptSearch: false,
     gptMovies: null,
     movieNames: null,
+    errorMessage: "",
   },
 
   reducers: {
@@ -17,8 +18,19 @@ const gptSearchSlice = createSlice({
       state.gptMovies = movieResults;
       state.movieNames = movieNames;
     },
+    addErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    },
+    removeErrorMessage: (state, action) => {
+      state.errorMessage = "";
+    },
   },
 });
 
-export const { toggleGptSearch, addGptMovieResult } = gptSearchSlice.actions;
+export const {
+  toggleGptSearch,
+  addGptMovieResult,
+  addErrorMessage,
+  removeErrorMessage,
+} = gptSearchSlice.actions;
 export default gptSearchSlice.reducer;
