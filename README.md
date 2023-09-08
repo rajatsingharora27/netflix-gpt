@@ -50,7 +50,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ![Screenshot (15)](https://github.com/rajatsingharora27/netflix-gpt/assets/76241298/b341871e-c2a9-4c15-b1df-3e77ef703a6d)
 
 # GPT API Search Response
-![Uploading Screenshot (16).png…]()
+
+![Screenshot (16)](https://github.com/rajatsingharora27/netflix-gpt/assets/76241298/19509693-69e1-4781-b844-8dfe12580f13)
 
 
 
