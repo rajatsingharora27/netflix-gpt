@@ -1,6 +1,4 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -43,3 +41,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 # Project Setup
 
 - Before starting the project please add .env file and add TMDB and OPENAI KEY into it.
+
+
+# Login Page
+img()
