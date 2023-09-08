@@ -27,9 +27,9 @@ const SearchBarGpt = () => {
   };
 
   const handleSearchOpenAI = async () => {
-    console.log(showLoading);
+    // console.log(showLoading);
     setShowLoading(true);
-    console.log(showLoading);
+    // console.log(showLoading);
     //----------------Commented  this to prevent OPENAPI CALL------------------------//
 
     const messageString =
@@ -72,9 +72,9 @@ const SearchBarGpt = () => {
   };
 
   return (
-    <div className="pt-[10%] flex justify-center ">
+    <div className="pt-[35%] flex justify-center items-center  md:pt-[10%] ">
       <form
-        className="w-1/2 grid grid-cols-12 bg-black  rounded-lg "
+        className="w-full  grid grid-cols-12 bg-black  rounded-lg md:w-1/2 md:mt-[0px] "
         onSubmit={(e) => e.preventDefault}
       >
         <input

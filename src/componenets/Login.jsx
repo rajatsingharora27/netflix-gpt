@@ -53,11 +53,11 @@ const Login = () => {
       <img
         src={imageConstants.backgroundImage}
         alt="Logo"
-        className="absolute w-[100vw] max-h-max bg-image-gradient-315deg from-violet-500 to-fuchsia-500 "
+        className="absolute w-screen h-screen object-cover bg-image-gradient-315deg from-violet-500 to-fuchsia-500 "
       />
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute mx-auto left-0 right-0 bg-black p-12 w-3/12 my-32 text-white flex flex-col justify-start rounded-lg bg-opacity-80 "
+        className="absolute w-full  md:w-1/2  mx-auto left-0 right-0 bg-black p-12 lg:w-3/12 my-32 text-white flex flex-col justify-start rounded-lg bg-opacity-80 "
       >
         <h1 className=" text-3xl font-bold">
           {isSignInForm ? "Sign In" : "Sign Up"}

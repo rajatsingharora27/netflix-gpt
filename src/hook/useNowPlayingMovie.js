@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, URL } from "../utils/constants/apiConstants";
 import { addNowPlayingMovies } from "../redux/slice/movieSlice";
 
 const useNowPlayingMovies = () => {
   const dispatch = new useDispatch();
+  const nowPlayingMovie = useSelector((store) => store.movie.nowPlayingMovies);
   useEffect(() => {
     const getMainPageList = async () => {
       // console.log(URL);
@@ -13,6 +14,7 @@ const useNowPlayingMovies = () => {
       // console.log(json.results);
       dispatch(addNowPlayingMovies(json.results));
     };
+
     getMainPageList();
   }, []);
 };

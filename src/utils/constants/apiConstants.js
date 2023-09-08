@@ -13,10 +13,9 @@ export const API_OPTIONS = {
   },
 };
 
-export const OPENAI_API_KEY =
-  "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";
+export const OPENAI_API_KEY = process.env.REACT_APP_OPEN_API_KEY;
 
-// process.env.REACT_APP_OPEN_API_KEY;
+//
 
 // fetch(url, options)
 //   .then(res => res.json())

@@ -9,7 +9,7 @@ const Secondarycontainer = () => {
   // console.log(popularMovies);
   return (
     <div className=" pl-2 bg-black ">
-      <div className="-mt-56 relative z-20">
+      <div className="mt-0   lg:-mt-56 lg:relative z-20">
         {" "}
         {Object.entries(movies).length !== 0 && (
           <MovieList title={"Now Playing"} movies={movies} />

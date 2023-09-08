@@ -4,7 +4,7 @@ import { imageConstants } from "../../utils/constants/imageConstant";
 const MovieCard = ({ posterPath }) => {
   if (!posterPath) return;
   return (
-    <div className="w-56">
+    <div className="w-48 md:w-56">
       <img
         alt="Now playing movie"
         src={imageConstants.imageCDNbasePath + posterPath}
