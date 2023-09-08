@@ -44,4 +44,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 # Login Page
-img()
+![Screenshot (14)](https://github.com/rajatsingharora27/netflix-gpt/assets/76241298/be0c956a-6da8-4c90-9a3f-6d099a760310)
+
+# Main Section
+![Screenshot (15)](https://github.com/rajatsingharora27/netflix-gpt/assets/76241298/b341871e-c2a9-4c15-b1df-3e77ef703a6d)
+
+# GPT API Search Response
+![Uploading Screenshot (16).png…]()
+
+
+
